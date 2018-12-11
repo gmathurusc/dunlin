@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duns Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+<form>
+    Company name:<br>
+    <input type="text" name="company_name"><br>
+    Company Address:<br>
+    <input type="text" name="company_address">
+    Contact name:<br>
+    <input type="text" name="contact_name">
+    Contact Person's Designation:<br>
+    <input type="text" name="designation">
+    Contact Number:<br>
+    <input type="text" name="contact_number">
+    Contact Email Address:<br>
+    <input type="text" name="contact_email">
+    Employee Size:<br>
+    <input type="text" name="employee_size">
+</form>
+
+</body>
+
+<script>
+    let code = getUrlParameter('code');
+    var token = '';
+    $(document).ready(function(){
+        var getToken = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://dunlin.auth.us-west-2.amazoncognito.com/oauth2/token",
+            "method": "POST",
+            "headers": {
+                "authorization": "Basic NnQycmR2b2QzM3Q4MzM5anJqZWRhZzRsNG86MW9ob2xsY2ZzY2QyaXZldXYzMWZtY2RnaHZyaGM4ZjkxN2txc2YxdnU5dGcxOHI1azJiZg==",
+                "content-type": "application/x-www-form-urlencoded"
+            },
+            "data": {
+                "grant_type": "authorization_code",
+                "client_id": "6t2rdvod33t8339jrjedag4l4o",
+                "redirect_uri": "http://localhost:8888",
+                "code": code
+            }
+        }
+
+        // var dunsRegistration = {
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "url": "https://571djkdkh4.execute-api.us-west-2.amazonaws.com/Dev/duns-registration",
+        //     "method": "POST",
+        //     "headers": {
+        //         "authorization": id_token
+        //     },
+        // }
+
+        $.ajax(getToken).done(function (tokens) {
+            token = tokens.id_token;
+            console.log(token);
+            $.ajax({
+                async: true,
+                crossDomain: true,
+                type: 'POST',
+                url: "https://571djkdkh4.execute-api.us-west-2.amazonaws.com/Dev/duns-registration",
+                headers: {
+                    "authorization": token
+                }
+            }).done(function(data) {
+                alert(data);
+            });
+        });
+
+
+    });
+    function getUrlParameter(sParam) {
+        let sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    }
+</script>
+</html>
