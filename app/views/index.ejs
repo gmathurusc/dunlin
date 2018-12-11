@@ -4,25 +4,91 @@
     <meta charset="UTF-8">
     <title>Duns Registration</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
-<form>
-    Company name:<br>
-    <input type="text" name="company_name"><br>
-    Company Address:<br>
-    <input type="text" name="company_address">
-    Contact name:<br>
-    <input type="text" name="contact_name">
-    Contact Person's Designation:<br>
-    <input type="text" name="designation">
-    Contact Number:<br>
-    <input type="text" name="contact_number">
-    Contact Email Address:<br>
-    <input type="text" name="contact_email">
-    Employee Size:<br>
-    <input type="text" name="employee_size">
-</form>
+<div class="container">
+    <div class="col-md-12" style="text-align: center;">
+        <h2 class="col-md-12">DUNS Registration</h2>
+    </div>
+    <table class="col-md-8" style="left: 16%;">
+        <tbody>
+        <tr>
+            <td colspan="1">
+                <form class="well form-horizontal" id="duns-registration-form">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Contact Name</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="contact_name" name="contact_name" placeholder="Contact Name" class="form-control" required="true" value="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Contact Person’s Designation</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="designation" name="contact_designation" placeholder="Contact Person’s Designation" class="form-control" required="true" value="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Contact Number</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                    <input id="contact_number" name="contact_number" placeholder="Contact Number" class="form-control" required="true" value="" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Contact E-mail Address</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input id="contact_email" name="contact_email" placeholder="Contact E-mail Address" class="form-control" required="true" value="" type="text"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Company Name</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <input id="company_name" name="company_name" placeholder="Company Name" class="form-control" required="true" value="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Company Address</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <input id="company_address" name="company_address" placeholder="Company Address" class="form-control" required="true" value="" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Employee Size</label>
+                            <div class="col-md-8 inputGroupContainer">
+                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <input id="employee_size" name="employee_size" placeholder="Employee Size" class="form-control" required="true" value="" type="text"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4 inputGroupContainer">
+                                    <input style="left: 100%; top: 15px; height: 50px;" id="submit" name="submit" placeholder="submit" class="form-control col-md-3"  value="Submit" type="button"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </td>
+            <td>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 
@@ -31,7 +97,6 @@
     var token = '';
     $(document).ready(function(){
         var getToken = {
-            "async": true,
             "crossDomain": true,
             "url": "https://dunlin.auth.us-west-2.amazoncognito.com/oauth2/token",
             "method": "POST",
@@ -42,38 +107,52 @@
             "data": {
                 "grant_type": "authorization_code",
                 "client_id": "6t2rdvod33t8339jrjedag4l4o",
-                "redirect_uri": "http://localhost:8888",
+                "redirect_uri": "http://localhost:8889",
                 "code": code
             }
         }
 
-        // var dunsRegistration = {
-        //     "async": true,
-        //     "crossDomain": true,
-        //     "url": "https://571djkdkh4.execute-api.us-west-2.amazonaws.com/Dev/duns-registration",
-        //     "method": "POST",
-        //     "headers": {
-        //         "authorization": id_token
-        //     },
-        // }
+        $('#submit').on("click",function() {
+            $.ajax(getToken).done(function (tokens) {
+                token = tokens.id_token;
+                var params = $('#duns-registration-form').serializeArray().reduce(function(obj, item) {
+                    obj[item.name] = item.value;
+                    return obj;
+                }, {});
+                console.log("params", params);
+                const data = {
+                    "company_name": params.company_name,
+                    "company_address": params.company_address,
+                    "contact_name": params.contact_name,
+                    "contact_designation": params.contact_designation,
+                    "contact_number": params.contact_number,
+                    "contact_email_address": params.contact_email,
+                    "employee_size": params.employee_size
+                };
+                $.ajax({
+                    crossDomain: true,
+                    type: 'POST',
+                    url: "https://571djkdkh4.execute-api.us-west-2.amazonaws.com/Dev/duns-registration",
+                    data:JSON.stringify(data),
+                    dataType: "json",
+                    contentType: "application/json",
+                    headers: {
+                        "authorization": token,
+                        "content-type": "application/json"
+                    },
+                    error: function(err){
+                        console.log('failure', err);
+                    },
+                    success: function(response){
+                        alert(response.status);
+                        window.location.href = "/success?status=" + response.status + "&requestTime=" + response.requestTime
+                            + "&dunSmartRequestID=" + response.dunSmartRequestID;
 
-        $.ajax(getToken).done(function (tokens) {
-            token = tokens.id_token;
-            console.log(token);
-            $.ajax({
-                async: true,
-                crossDomain: true,
-                type: 'POST',
-                url: "https://571djkdkh4.execute-api.us-west-2.amazonaws.com/Dev/duns-registration",
-                headers: {
-                    "authorization": token
-                }
-            }).done(function(data) {
-                alert(data);
-            });
+                    }
+                }).done(function(data) {
+                });
+            })
         });
-
-
     });
     function getUrlParameter(sParam) {
         let sPageURL = window.location.search.substring(1),

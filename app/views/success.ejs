@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duns Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    Status : <h2 id="status"></h2>
+    Request Time : <h2 id="requestTime"></h2>
+    DunSmart Request ID : <h2 id="dunSmartRequestID"></h2>
+</body>
+
+</html>
+
+<script>
+    let status = getUrlParameter('status');
+    let requestTime = getUrlParameter('requestTime');
+    let dunSmartRequestID = getUrlParameter('dunSmartRequestID');
+
+
+    $("#status").html(status);
+    $("#requestTime").html(requestTime);
+    $("#dunSmartRequestID").html(dunSmartRequestID);
+
+    function getUrlParameter(sParam) {
+        let sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+    }
+</script>

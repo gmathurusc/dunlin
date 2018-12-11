@@ -17,7 +17,7 @@ app.set('public', path.join(__dirname, 'public'));
 //Set Static Path
 app.use('/public', express.static(__dirname + '/public'));
 
-port = process.env.PORT || 8888;
+port = process.env.PORT || 8889;
 app.listen(port, function () {
     console.log("Server serving on " + port+"...");
 });

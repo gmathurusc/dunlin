@@ -8,4 +8,9 @@ module.exports = app => {
         console.log("home");
         res.render('index.ejs');
     });
+
+    app.get('/success',function(req,res){
+        console.log("success");
+        res.render('success.ejs');
+    });
 };
